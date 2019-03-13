@@ -1,0 +1,25 @@
+## Your moneighbors = KNeighborsClassifier(n_neighbors=5)
+from sklearn.neighbors import KNeighborsClassifier
+knn_S = KNeighborsClassifier(n_neighbors=1)
+X = pd.DataFrame(music.loudness)
+Y = music.bpm
+knn_S.fit(X, Y)
+
+
+
+
+
+from sklearn.neighbors import BallTree
+np.random.seed(0)
+tree = BallTree(X, leaf_size=2)
+dist, ind = tree.query(X[:1], k=2)
+print(ind)
+print(dist)
+
+
+
+from sklearn.model_selection import cross_val_score
+score = cross_val_score(knn, X, Y, cv=5)
+print("Unweighted Accuracy: %0.2f (+/- %0.2f)" % (score.mean(), score.std() * 2))
+score_w = cross_val_score(knn_S, X, Y, cv=5)
+print("Weighted Accuracy: %0.2f (+/- %0.2f)" % (score_w.mean(), score_w.std() * 2))
